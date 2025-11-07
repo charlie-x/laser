@@ -12,48 +12,118 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #0f3460 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* animated background particles */
+        body::before {
+            content: '';
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: 
+                radial-gradient(circle, rgba(138, 43, 226, 0.1) 1px, transparent 1px),
+                radial-gradient(circle, rgba(0, 188, 212, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px, 80px 80px;
+            background-position: 0 0, 40px 40px;
+            animation: drift 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes drift {
+            from {
+                transform: rotate(0deg) scale(1.5);
+            }
+            to {
+                transform: rotate(360deg) scale(1.5);
+            }
         }
 
         .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 40px;
-            max-width: 600px;
+            background: rgba(20, 20, 30, 0.95);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: 24px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 120px rgba(138, 43, 226, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            padding: 45px;
+            max-width: 650px;
             width: 100%;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(138, 43, 226, 0.6), 
+                rgba(0, 188, 212, 0.6),
+                transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 1;
+            }
         }
 
         h1 {
-            colour: #333;
+            color: #fff;
             margin-bottom: 10px;
             text-align: centre;
-            font-size: 28px;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff 0%, #8a2be2 50%, #00bcd4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(138, 43, 226, 0.5);
         }
 
         .subtitle {
-            colour: #666;
+            color: rgba(255, 255, 255, 0.5);
             text-align: centre;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
         }
 
         .input-group {
-            margin-bottom: 25px;
+            margin-bottom: 28px;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
-            colour: #555;
-            font-weight: 500;
-            font-size: 14px;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .input-wrapper {
@@ -64,90 +134,180 @@
 
         input[type="number"], select {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            padding: 14px 16px;
+            border: 2px solid rgba(138, 43, 226, 0.2);
+            border-radius: 12px;
             font-size: 16px;
-            transition: border-colour 0.3s;
-            background: #f9f9f9;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            backdrop-filter: blur(10px);
         }
 
         input[type="number"]:focus, select:focus {
             outline: none;
-            border-colour: #667eea;
-            background: white;
+            border-color: #8a2be2;
+            background: rgba(138, 43, 226, 0.1);
+            box-shadow: 
+                0 0 0 3px rgba(138, 43, 226, 0.1),
+                0 0 20px rgba(138, 43, 226, 0.2);
+            transform: translateY(-2px);
+        }
+
+        input[type="number"]:hover, select:hover {
+            border-color: rgba(138, 43, 226, 0.4);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        select option {
+            background: #1a1a2e;
+            color: #fff;
         }
 
         .unit {
             position: absolute;
-            right: 15px;
-            colour: #888;
+            right: 16px;
+            color: rgba(255, 255, 255, 0.4);
             font-size: 14px;
             pointer-events: none;
+            font-weight: 600;
         }
 
         input[type="number"] {
-            padding-right: 45px;
+            padding-right: 50px;
         }
 
         .preset-buttons {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+            gap: 8px;
+            margin-top: 12px;
         }
 
         .preset-btn {
-            padding: 8px 12px;
-            background: #f0f0f0;
-            border: 2px solid #e0e0e0;
-            border-radius: 6px;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(138, 43, 226, 0.2);
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
-            font-size: 14px;
+            transition: all 0.3s ease;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preset-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(138, 43, 226, 0.6);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
         }
 
         .preset-btn:hover {
-            background: #667eea;
-            border-colour: #667eea;
-            colour: white;
+            border-color: #8a2be2;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+        }
+
+        .preset-btn:hover::before {
+            width: 100px;
+            height: 100px;
         }
 
         .preset-btn.active {
-            background: #667eea;
-            border-colour: #667eea;
-            colour: white;
+            background: linear-gradient(135deg, #8a2be2 0%, #00bcd4 100%);
+            border-color: transparent;
+            color: #fff;
+            box-shadow: 0 5px 20px rgba(138, 43, 226, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .preset-btn.active::before {
+            display: none;
         }
 
         .calculate-btn {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            colour: white;
+            padding: 16px;
+            background: linear-gradient(135deg, #8a2be2 0%, #00bcd4 100%);
+            color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 20px;
+            transition: all 0.3s ease;
+            margin-top: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calculate-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .calculate-btn:hover::before {
+            left: 100%;
         }
 
         .calculate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(138, 43, 226, 0.4);
         }
 
         .calculate-btn:active {
-            transform: translateY(0);
+            transform: translateY(-1px);
         }
 
         .results {
-            margin-top: 30px;
-            padding: 25px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 12px;
+            margin-top: 35px;
+            padding: 30px;
+            background: rgba(138, 43, 226, 0.1);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: 16px;
             display: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .results::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
         }
 
         .results.show {
@@ -170,8 +330,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+            position: relative;
+            z-index: 1;
         }
 
         .result-item:last-child {
@@ -179,27 +341,48 @@
         }
 
         .result-label {
-            colour: #555;
-            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
         }
 
         .result-value {
             font-size: 20px;
             font-weight: 700;
-            colour: #333;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
         }
 
         .result-value.highlight {
-            colour: #667eea;
-            font-size: 24px;
+            font-size: 28px;
+            background: linear-gradient(135deg, #8a2be2 0%, #00bcd4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                filter: drop-shadow(0 0 5px rgba(138, 43, 226, 0.5));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px rgba(138, 43, 226, 0.8));
+            }
         }
 
         .diagram {
-            margin-top: 20px;
+            margin-top: 25px;
             padding: 20px;
-            background: white;
-            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            border-radius: 12px;
             text-align: centre;
+            position: relative;
+            z-index: 1;
         }
 
         canvas {
@@ -208,13 +391,22 @@
         }
 
         .info-box {
-            margin-top: 20px;
-            padding: 15px;
-            background: #fef5e7;
-            border-left: 4px solid #f39c12;
-            border-radius: 6px;
-            font-size: 14px;
-            colour: #856404;
+            margin-top: 25px;
+            padding: 18px;
+            background: rgba(255, 152, 0, 0.1);
+            border-left: 4px solid #ff9800;
+            border-radius: 8px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(5px);
+        }
+
+        .info-box strong {
+            color: #ff9800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .slider-container {
@@ -223,14 +415,59 @@
 
         input[type="range"] {
             width: 100%;
-            margin-top: 10px;
+            margin-top: 12px;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #8a2be2 0%, #00bcd4 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+            transition: all 0.3s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #8a2be2 0%, #00bcd4 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+            transition: all 0.3s;
+        }
+
+        input[type="range"]::-moz-range-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
         }
 
         .slider-value {
             text-align: centre;
-            margin-top: 5px;
+            margin-top: 8px;
             font-size: 14px;
-            colour: #666;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+        }
+
+        /* smooth transitions for all interactive elements */
+        * {
+            transition: color 0.3s, background-color 0.3s, border-color 0.3s;
         }
     </style>
 </head>
@@ -423,39 +660,69 @@
             const workY = centerY + focalLength * scale;
             const targetX = centerX + distance * scale;
             
+            // draw glow effect for lens
+            const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 30);
+            gradient.addColorStop(0, 'rgba(138, 43, 226, 0.3)');
+            gradient.addColorStop(1, 'transparent');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 30, 0, Math.PI * 2);
+            ctx.fill();
+            
             // draw lens
-            ctx.strokeStyle = '#667eea';
+            ctx.strokeStyle = '#8a2be2';
             ctx.lineWidth = 3;
             ctx.beginPath();
             ctx.arc(centerX, centerY, 20, 0, Math.PI * 2);
             ctx.stroke();
-            ctx.fillStyle = '#667eea';
+            
+            // lens highlight
+            ctx.strokeStyle = '#00bcd4';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 22, -Math.PI / 4, Math.PI / 4);
+            ctx.stroke();
+            
+            ctx.fillStyle = '#8a2be2';
             ctx.font = '12px Arial';
             ctx.fillText('lens', centerX - 15, centerY - 25);
             
-            // draw work surface
-            ctx.strokeStyle = '#333';
+            // draw work surface with glow
+            ctx.shadowColor = 'rgba(0, 188, 212, 0.5)';
+            ctx.shadowBlur = 10;
+            ctx.strokeStyle = '#00bcd4';
             ctx.lineWidth = 2;
             ctx.beginPath();
             ctx.moveTo(30, workY);
             ctx.lineTo(canvas.width - 30, workY);
             ctx.stroke();
-            ctx.fillStyle = '#333';
+            ctx.shadowBlur = 0;
+            
+            ctx.fillStyle = '#00bcd4';
             ctx.font = '12px Arial';
             ctx.fillText('work surface', 30, workY + 20);
             
-            // draw laser beam path
-            ctx.strokeStyle = '#ff0000';
+            // draw laser beam path with gradient
+            const beamGradient = ctx.createLinearGradient(centerX, centerY, targetX, workY);
+            beamGradient.addColorStop(0, 'rgba(255, 0, 100, 0.8)');
+            beamGradient.addColorStop(1, 'rgba(255, 100, 0, 0.8)');
+            ctx.strokeStyle = beamGradient;
             ctx.lineWidth = 2;
-            ctx.setLineDash([5, 5]);
             ctx.beginPath();
             ctx.moveTo(centerX, centerY);
             ctx.lineTo(targetX, workY);
             ctx.stroke();
-            ctx.setLineDash([]);
+            
+            // draw laser beam glow
+            ctx.strokeStyle = 'rgba(255, 0, 100, 0.3)';
+            ctx.lineWidth = 6;
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(targetX, workY);
+            ctx.stroke();
             
             // draw perpendicular line for reference
-            ctx.strokeStyle = '#888';
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
             ctx.lineWidth = 1;
             ctx.setLineDash([3, 3]);
             ctx.beginPath();
@@ -465,29 +732,42 @@
             ctx.setLineDash([]);
             
             // draw angle arc
-            ctx.strokeStyle = '#667eea';
+            ctx.strokeStyle = '#8a2be2';
             ctx.lineWidth = 2;
             ctx.beginPath();
             const arcRadius = 40;
             ctx.arc(centerX, centerY, arcRadius, Math.PI / 2, Math.PI / 2 + (angle * Math.PI / 180), false);
             ctx.stroke();
             
-            // label angle
-            ctx.fillStyle = '#667eea';
+            // label angle with glow
+            ctx.shadowColor = 'rgba(138, 43, 226, 0.8)';
+            ctx.shadowBlur = 5;
+            ctx.fillStyle = '#8a2be2';
             ctx.font = 'bold 14px Arial';
             ctx.fillText(angle.toFixed(1) + '°', centerX + 45, centerY + 20);
+            ctx.shadowBlur = 0;
             
             // label distances
-            ctx.fillStyle = '#666';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
             ctx.font = '11px Arial';
             ctx.fillText(focalLength.toFixed(0) + ' mm', centerX + 5, centerY + focalLength * scale / 2);
             ctx.fillText(distance.toFixed(0) + ' mm', centerX + (targetX - centerX) / 2 - 15, workY - 5);
             
-            // draw target point
-            ctx.fillStyle = '#ff0000';
+            // draw target point with glow
+            ctx.shadowColor = 'rgba(255, 100, 0, 0.8)';
+            ctx.shadowBlur = 10;
+            ctx.fillStyle = '#ff6400';
             ctx.beginPath();
             ctx.arc(targetX, workY, 5, 0, Math.PI * 2);
             ctx.fill();
+            ctx.shadowBlur = 0;
+            
+            // draw target point highlight
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(targetX, workY, 7, 0, Math.PI * 2);
+            ctx.stroke();
         }
 
         // calculate on page load with default values
