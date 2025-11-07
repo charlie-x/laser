@@ -873,6 +873,16 @@
                 ctx.stroke();
                 ctx.setLineDash([]);
                 
+                // draw static reference line for beam path (always visible)
+                ctx.strokeStyle = 'rgba(150, 150, 150, 0.3)';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([4, 4]);
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.lineTo(targetX, workY);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                
                 // draw angle arc
                 ctx.strokeStyle = '#8a2be2';
                 ctx.lineWidth = 2;
