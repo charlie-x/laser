@@ -113,6 +113,15 @@
             text-shadow: 0 0 40px rgba(138, 43, 226, 0.5);
         }
 
+        h2 {
+            color: #00bcd4;
+            margin-bottom: 20px;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: centre;
+        }
+
         .subtitle {
             color: rgba(255, 255, 255, 0.5);
             text-align: centre;
@@ -425,6 +434,215 @@
             z-index: 1;
         }
 
+        .cut-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            border-radius: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cut-section h3 {
+            color: #00bcd4;
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: centre;
+        }
+
+        .material-controls {
+            margin-bottom: 15px;
+            text-align: centre;
+        }
+
+        .material-controls label {
+            display: block;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+        }
+
+        .thickness-buttons {
+            display: flex;
+            justify-content: centre;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .thickness-btn {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(138, 43, 226, 0.2);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+        }
+
+        .thickness-btn:hover {
+            border-color: #00bcd4;
+            color: #fff;
+            background: rgba(0, 188, 212, 0.1);
+        }
+
+        .thickness-btn.active {
+            background: linear-gradient(135deg, #00bcd4 0%, #0097a7 100%);
+            border-color: transparent;
+            color: #fff;
+        }
+
+        .cut-measurements {
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .measurement {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+            border: 1px solid rgba(138, 43, 226, 0.1);
+        }
+
+        .measurement-label {
+            display: block;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .measurement-value {
+            display: block;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        #cutQuality {
+            color: #4caf50;
+        }
+
+        .calculation-note {
+            margin-top: 15px;
+            text-align: centre;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 10px;
+            font-style: italic;
+        }
+
+        /* Tab navigation styles */
+        .tab-navigation {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(138, 43, 226, 0.2);
+            padding-bottom: 0;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            border-top: 2px solid transparent;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .tab-btn:hover {
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(138, 43, 226, 0.1);
+        }
+
+        .tab-btn.active {
+            color: #00bcd4;
+            border-top-color: #00bcd4;
+            background: rgba(0, 188, 212, 0.1);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .result-card, .property-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .result-card h3, .property-card h3 {
+            color: #00bcd4;
+            font-size: 14px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric {
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            display: block;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+            margin-bottom: 3px;
+        }
+
+        .metric-value {
+            display: block;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .metric-value.highlight {
+            color: #8a2be2;
+        }
+
+        /* Material tab styles */
+        .material-selector {
+            margin-bottom: 25px;
+        }
+
+        .material-properties {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Tools tab styles */
         canvas {
             max-width: 100%;
             height: auto;
@@ -515,10 +733,17 @@
     <canvas id="particleCanvas"></canvas>
     <div class="container">
         <h1>Galvo Fibre Laser Angle Calculator</h1>
-        <p class="subtitle">calculate beam incidence angle based on lens and field position</p>
+        <p class="subtitle">professional laser cutting parameter calculator</p>
         <div class="interaction-hint">
             <span>🎮 Click background for lasers • Press [Space] for burst • Press [P] for particles</span>
         </div>
+
+        <div class="tab-navigation">
+            <button class="tab-btn active" onclick="switchTab('basic')">Basic Calculator</button>
+            <button class="tab-btn" onclick="switchTab('materials')">Materials</button>
+        </div>
+
+        <div id="basic-tab" class="tab-content active">
 
         <div class="input-group">
             <label for="focalLength">Lens Focal Length</label>
@@ -608,12 +833,105 @@
             <div class="diagram">
                 <canvas id="diagram" width="400" height="300"></canvas>
             </div>
+            
+            <div class="cut-section">
+                <h3>Material Cut Cross-Section</h3>
+                <div class="material-controls">
+                    <label for="materialThickness">Material Thickness</label>
+                    <div class="thickness-buttons">
+                        <button class="thickness-btn active" onclick="setThickness(1)">1mm</button>
+                        <button class="thickness-btn" onclick="setThickness(3)">3mm</button>
+                        <button class="thickness-btn" onclick="setThickness(6)">6mm</button>
+                        <button class="thickness-btn" onclick="setThickness(10)">10mm</button>
+                        <button class="thickness-btn" onclick="setThickness(15)">15mm</button>
+                    </div>
+                </div>
+                <canvas id="cutDiagram" width="400" height="250"></canvas>
+                <div class="cut-measurements">
+                    <div class="measurement">
+                        <span class="measurement-label">Top Kerf Width:</span>
+                        <span class="measurement-value" id="topKerf">0.00 mm</span>
+                    </div>
+                    <div class="measurement">
+                        <span class="measurement-label">Bottom Kerf Width:</span>
+                        <span class="measurement-value" id="bottomKerf">0.00 mm</span>
+                    </div>
+                    <div class="measurement">
+                        <span class="measurement-label">Cut Taper Angle:</span>
+                        <span class="measurement-value" id="taperAngle">0.0°</span>
+                    </div>
+                    <div class="measurement">
+                        <span class="measurement-label">Cut Quality:</span>
+                        <span class="measurement-value" id="cutQuality">Excellent</span>
+                    </div>
+                </div>
+                <div class="calculation-note">
+                    <small>calculations based on: 0.15mm spot size, 3mrad beam divergence (typical fiber laser)</small>
+                </div>
+            </div>
 
             <div class="info-box">
                 <strong>note:</strong> the angle shown is the beam incidence angle relative to the perpendicular (normal) to the work surface. larger angles result in reduced cutting efficiency and potential quality issues. typical acceptable angles are below 15-20° for most applications.
             </div>
         </div>
-    </div>
+        </div> <!-- end basic-tab -->
+
+        <div id="materials-tab" class="tab-content">
+            <h2>Material Database</h2>
+            
+            <div class="material-selector">
+                <label for="materialType">Select Material</label>
+                <select id="materialType" onchange="loadMaterialProperties()">
+                    <option value="mild-steel">Mild Steel</option>
+                    <option value="stainless">Stainless Steel</option>
+                    <option value="aluminium">Aluminium</option>
+                    <option value="brass">Brass</option>
+                    <option value="copper">Copper</option>
+                    <option value="titanium">Titanium</option>
+                    <option value="acrylic">Acrylic</option>
+                    <option value="wood">Wood</option>
+                    <option value="abs">ABS Plastic</option>
+                    <option value="carbon-fiber">Carbon Fibre</option>
+                </select>
+            </div>
+            
+            <div class="material-properties">
+                <div class="property-card">
+                    <h3>Optical Properties</h3>
+                    <div class="metric">
+                        <span class="metric-label">Absorption @ 1070nm:</span>
+                        <span class="metric-value" id="absorption">0%</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Reflectivity:</span>
+                        <span class="metric-value" id="reflectivity">0%</span>
+                    </div>
+                </div>
+                
+                <div class="property-card">
+                    <h3>Recommended Parameters</h3>
+                    <div class="metric">
+                        <span class="metric-label">Power Range:</span>
+                        <span class="metric-value" id="powerRange">0-0 W</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Speed Range:</span>
+                        <span class="metric-value" id="speedRange">0-0 mm/s</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Max Angle:</span>
+                        <span class="metric-value" id="maxAngle">0°</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Assist Gas:</span>
+                        <span class="metric-value" id="assistGas">None</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div> <!-- end container -->
 
     <script>
         function setFocalLength(value) {
@@ -689,11 +1007,298 @@
             
             // draw diagram
             drawDiagram(focalLength, distanceFromCentre, angleDegrees);
+            
+            // draw cut section
+            drawCutSection(angleDegrees, currentThickness);
         }
 
         // animation state for diagram laser
         let diagramAnimationFrame = 0;
         let diagramAnimationId = null;
+        let currentThickness = 1; // default thickness in mm
+        
+        function setThickness(thickness) {
+            currentThickness = thickness;
+            
+            // update active button
+            const buttons = document.querySelectorAll('.thickness-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === thickness + 'mm') {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // recalculate and redraw
+            calculate();
+        }
+        
+        function drawCutSection(angle, thickness) {
+            const canvas = document.getElementById('cutDiagram');
+            const ctx = canvas.getContext('2d');
+            
+            // clear canvas
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            const centerX = canvas.width / 2;
+            const topY = 50;
+            const scale = Math.min(150 / thickness, 10); // scale based on thickness
+            const materialHeight = thickness * scale;
+            const bottomY = topY + materialHeight;
+            
+            // calculate kerf widths based on angle
+            // typical spot size 0.05-0.15mm for fibre lasers
+            const spotSize = 0.08; // mm at focus (80 microns - typical for fibre laser)
+            const beamDivergence = 0.002; // 2 milliradians typical for fibre laser
+            
+            // top kerf is the spot size projected at angle
+            // when cutting at an angle, the circular spot becomes elliptical
+            const topKerfWidth = spotSize / Math.cos(angle * Math.PI / 180);
+            
+            // calculate actual path length through material at angle
+            const pathLength = thickness / Math.cos(angle * Math.PI / 180);
+            
+            // beam diverges as it travels through material
+            // divergence effect = path_length * tan(divergence_angle)
+            const beamExpansion = pathLength * Math.tan(beamDivergence);
+            
+            // bottom kerf is top kerf plus the beam expansion on both sides
+            const bottomKerfWidth = topKerfWidth + (beamExpansion * 2);
+            
+            // add small thermal effect (material melts slightly beyond beam)
+            const thermalEffect = 0.01; // 10 microns thermal spread
+            const finalTopKerf = topKerfWidth + thermalEffect;
+            const finalBottomKerf = bottomKerfWidth + thermalEffect;
+            
+            // scale for drawing (exaggerate for visibility)
+            const maxKerf = Math.max(finalTopKerf, finalBottomKerf);
+            const drawScale = Math.min(100, 30 / maxKerf); // scale to make visible but reasonable
+            const topKerfPixels = finalTopKerf * drawScale;
+            const bottomKerfPixels = finalBottomKerf * drawScale;
+            
+            // draw material blocks (left and right of cut)
+            const gradient = ctx.createLinearGradient(0, topY, 0, bottomY);
+            gradient.addColorStop(0, 'rgba(100, 100, 120, 1)');
+            gradient.addColorStop(0.5, 'rgba(80, 80, 100, 1)');
+            gradient.addColorStop(1, 'rgba(60, 60, 80, 1)');
+            
+            // left material block
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.moveTo(20, topY);
+            ctx.lineTo(centerX - topKerfPixels/2, topY);
+            ctx.lineTo(centerX - bottomKerfPixels/2, bottomY);
+            ctx.lineTo(20, bottomY);
+            ctx.closePath();
+            ctx.fill();
+            
+            // right material block
+            ctx.beginPath();
+            ctx.moveTo(centerX + topKerfPixels/2, topY);
+            ctx.lineTo(canvas.width - 20, topY);
+            ctx.lineTo(canvas.width - 20, bottomY);
+            ctx.lineTo(centerX + bottomKerfPixels/2, bottomY);
+            ctx.closePath();
+            ctx.fill();
+            
+            // draw cut edges with heat affected zone
+            const hazGradientLeft = ctx.createLinearGradient(
+                centerX - topKerfPixels/2 - 10, topY,
+                centerX - topKerfPixels/2, topY
+            );
+            hazGradientLeft.addColorStop(0, 'transparent');
+            hazGradientLeft.addColorStop(0.5, 'rgba(255, 100, 0, 0.3)');
+            hazGradientLeft.addColorStop(1, 'rgba(255, 200, 0, 0.6)');
+            
+            const hazGradientRight = ctx.createLinearGradient(
+                centerX + topKerfPixels/2, topY,
+                centerX + topKerfPixels/2 + 10, topY
+            );
+            hazGradientRight.addColorStop(0, 'rgba(255, 200, 0, 0.6)');
+            hazGradientRight.addColorStop(0.5, 'rgba(255, 100, 0, 0.3)');
+            hazGradientRight.addColorStop(1, 'transparent');
+            
+            // left HAZ
+            ctx.fillStyle = hazGradientLeft;
+            ctx.beginPath();
+            ctx.moveTo(centerX - topKerfPixels/2 - 10, topY);
+            ctx.lineTo(centerX - topKerfPixels/2, topY);
+            ctx.lineTo(centerX - bottomKerfPixels/2, bottomY);
+            ctx.lineTo(centerX - bottomKerfPixels/2 - 10, bottomY);
+            ctx.closePath();
+            ctx.fill();
+            
+            // right HAZ
+            ctx.fillStyle = hazGradientRight;
+            ctx.beginPath();
+            ctx.moveTo(centerX + topKerfPixels/2, topY);
+            ctx.lineTo(centerX + topKerfPixels/2 + 10, topY);
+            ctx.lineTo(centerX + bottomKerfPixels/2 + 10, bottomY);
+            ctx.lineTo(centerX + bottomKerfPixels/2, bottomY);
+            ctx.closePath();
+            ctx.fill();
+            
+            // draw laser beam through the cut
+            const beamAngleRad = angle * Math.PI / 180;
+            const beamStartX = centerX - Math.sin(beamAngleRad) * 50;
+            const beamStartY = topY - Math.cos(beamAngleRad) * 50;
+            const beamEndX = centerX + Math.sin(beamAngleRad) * 50;
+            const beamEndY = bottomY + Math.cos(beamAngleRad) * 50;
+            
+            // beam glow
+            ctx.strokeStyle = 'rgba(255, 0, 100, 0.2)';
+            ctx.lineWidth = 20;
+            ctx.beginPath();
+            ctx.moveTo(beamStartX, beamStartY);
+            ctx.lineTo(beamEndX, beamEndY);
+            ctx.stroke();
+            
+            // beam core
+            const beamGradient = ctx.createLinearGradient(beamStartX, beamStartY, beamEndX, beamEndY);
+            beamGradient.addColorStop(0, 'rgba(255, 100, 200, 0.8)');
+            beamGradient.addColorStop(0.5, 'rgba(255, 0, 100, 1)');
+            beamGradient.addColorStop(1, 'rgba(255, 100, 0, 0.8)');
+            ctx.strokeStyle = beamGradient;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(beamStartX, beamStartY);
+            ctx.lineTo(beamEndX, beamEndY);
+            ctx.stroke();
+            
+            // draw surface texture/striations on cut edges
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 0.5;
+            for (let i = 0; i < 20; i++) {
+                const y = topY + (i * materialHeight / 20);
+                // left edge striations
+                ctx.beginPath();
+                ctx.moveTo(centerX - topKerfPixels/2 - (bottomKerfPixels - topKerfPixels) * i / 40, y);
+                ctx.lineTo(centerX - topKerfPixels/2 - (bottomKerfPixels - topKerfPixels) * i / 40 - 5, y);
+                ctx.stroke();
+                // right edge striations
+                ctx.beginPath();
+                ctx.moveTo(centerX + topKerfPixels/2 + (bottomKerfPixels - topKerfPixels) * i / 40, y);
+                ctx.lineTo(centerX + topKerfPixels/2 + (bottomKerfPixels - topKerfPixels) * i / 40 + 5, y);
+                ctx.stroke();
+            }
+            
+            // draw dimension lines
+            ctx.strokeStyle = 'rgba(0, 188, 212, 0.5)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([2, 2]);
+            
+            // top kerf width dimension
+            ctx.beginPath();
+            ctx.moveTo(centerX - topKerfPixels/2, topY - 10);
+            ctx.lineTo(centerX + topKerfPixels/2, topY - 10);
+            ctx.stroke();
+            
+            // vertical lines for top dimension
+            ctx.beginPath();
+            ctx.moveTo(centerX - topKerfPixels/2, topY - 15);
+            ctx.lineTo(centerX - topKerfPixels/2, topY - 5);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(centerX + topKerfPixels/2, topY - 15);
+            ctx.lineTo(centerX + topKerfPixels/2, topY - 5);
+            ctx.stroke();
+            
+            // bottom kerf width dimension
+            ctx.beginPath();
+            ctx.moveTo(centerX - bottomKerfPixels/2, bottomY + 10);
+            ctx.lineTo(centerX + bottomKerfPixels/2, bottomY + 10);
+            ctx.stroke();
+            
+            // vertical lines for bottom dimension
+            ctx.beginPath();
+            ctx.moveTo(centerX - bottomKerfPixels/2, bottomY + 5);
+            ctx.lineTo(centerX - bottomKerfPixels/2, bottomY + 15);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(centerX + bottomKerfPixels/2, bottomY + 5);
+            ctx.lineTo(centerX + bottomKerfPixels/2, bottomY + 15);
+            ctx.stroke();
+            
+            ctx.setLineDash([]);
+            
+            // labels
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.font = '10px Arial';
+            ctx.textAlign = 'centre';
+            ctx.fillText('TOP', centerX, topY - 20);
+            ctx.fillText('BOTTOM', centerX, bottomY + 25);
+            
+            // material thickness label
+            ctx.save();
+            ctx.translate(15, topY + materialHeight/2);
+            ctx.rotate(-Math.PI/2);
+            ctx.fillText(thickness + ' mm', 0, 0);
+            ctx.restore();
+            
+            // angle indicator
+            ctx.strokeStyle = 'rgba(138, 43, 226, 0.5)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([3, 3]);
+            ctx.beginPath();
+            ctx.moveTo(centerX, topY - 40);
+            ctx.lineTo(centerX, bottomY + 40);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            // draw angle arc
+            if (angle > 0) {
+                ctx.strokeStyle = 'rgba(138, 43, 226, 0.8)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(centerX, topY - 30, 20, Math.PI/2 - beamAngleRad, Math.PI/2);
+                ctx.stroke();
+                
+                ctx.fillStyle = '#8a2be2';
+                ctx.font = 'bold 11px Arial';
+                ctx.fillText(angle.toFixed(1) + '°', centerX + 30, topY - 25);
+            }
+            
+            // update measurements
+            document.getElementById('topKerf').textContent = finalTopKerf.toFixed(3) + ' mm';
+            document.getElementById('bottomKerf').textContent = finalBottomKerf.toFixed(3) + ' mm';
+            
+            // taper angle is half the difference in kerf widths over the thickness
+            // this creates the V-shaped cut profile
+            const taperAngleDeg = Math.atan((finalBottomKerf - finalTopKerf) / (2 * thickness)) * 180 / Math.PI;
+            document.getElementById('taperAngle').textContent = taperAngleDeg.toFixed(2) + '°';
+            
+            // determine cut quality based on angle
+            let quality = 'Excellent';
+            let qualityColor = '#4caf50';
+            if (angle > 20) {
+                quality = 'Poor';
+                qualityColor = '#f44336';
+            } else if (angle > 15) {
+                quality = 'Acceptable';
+                qualityColor = '#ff9800';
+            } else if (angle > 10) {
+                quality = 'Good';
+                qualityColor = '#ffc107';
+            } else if (angle > 5) {
+                quality = 'Very Good';
+                qualityColor = '#8bc34a';
+            }
+            
+            const qualityElement = document.getElementById('cutQuality');
+            qualityElement.textContent = quality;
+            qualityElement.style.color = qualityColor;
+            
+            // add quality indicator bar
+            ctx.fillStyle = qualityColor;
+            ctx.fillRect(canvas.width - 15, topY, 5, materialHeight);
+            
+            // magnification indicator
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.font = '10px Arial';
+            ctx.textAlign = 'right';
+            ctx.fillText('×' + scale.toFixed(0) + ' magnification', canvas.width - 20, canvas.height - 10);
+        }
         
         function drawDiagram(focalLength, distance, angle) {
             const canvas = document.getElementById('diagram');
@@ -937,7 +1542,140 @@
         window.onload = function() {
             calculate();
             initParticleSystem();
+            // initialize cut section with default values
+            const focalLength = parseFloat(document.getElementById('focalLength').value);
+            const distance = parseFloat(document.getElementById('distance')?.value || '50');
+            const angleRadians = Math.atan(distance / focalLength);
+            const angleDegrees = angleRadians * (180 / Math.PI);
+            drawCutSection(angleDegrees, currentThickness);
+            // initialize other calculators
+            setTimeout(() => {
+                calculateOptical();
+                calculatePractical();
+                loadMaterialProperties();
+                drawFieldQualityMap();
+            }, 100);
         };
+
+        // tab switching
+        function switchTab(tabName) {
+            // hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // deactivate all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // activate selected button
+            event.target.classList.add('active');
+            
+            // run tab-specific initializations
+            if (tabName === 'materials') {
+                // materials tab is already populated
+            }
+        }
+
+        // material properties database
+        const materialDatabase = {
+            'mild-steel': {
+                absorption: 35,
+                reflectivity: 65,
+                powerRange: [500, 3000],
+                speedRange: [10, 100],
+                maxAngle: 15,
+                assistGas: 'Oxygen'
+            },
+            'stainless': {
+                absorption: 32,
+                reflectivity: 68,
+                powerRange: [800, 4000],
+                speedRange: [5, 50],
+                maxAngle: 12,
+                assistGas: 'Nitrogen'
+            },
+            'aluminium': {
+                absorption: 8,
+                reflectivity: 92,
+                powerRange: [1000, 5000],
+                speedRange: [20, 150],
+                maxAngle: 10,
+                assistGas: 'Nitrogen'
+            },
+            'brass': {
+                absorption: 43,
+                reflectivity: 57,
+                powerRange: [600, 2500],
+                speedRange: [8, 60],
+                maxAngle: 15,
+                assistGas: 'Nitrogen'
+            },
+            'copper': {
+                absorption: 5,
+                reflectivity: 95,
+                powerRange: [2000, 6000],
+                speedRange: [5, 30],
+                maxAngle: 8,
+                assistGas: 'Oxygen'
+            },
+            'titanium': {
+                absorption: 42,
+                reflectivity: 58,
+                powerRange: [400, 2000],
+                speedRange: [3, 20],
+                maxAngle: 12,
+                assistGas: 'Argon'
+            },
+            'acrylic': {
+                absorption: 92,
+                reflectivity: 8,
+                powerRange: [30, 150],
+                speedRange: [10, 100],
+                maxAngle: 20,
+                assistGas: 'Air'
+            },
+            'wood': {
+                absorption: 85,
+                reflectivity: 15,
+                powerRange: [50, 500],
+                speedRange: [20, 200],
+                maxAngle: 25,
+                assistGas: 'Air'
+            },
+            'abs': {
+                absorption: 88,
+                reflectivity: 12,
+                powerRange: [40, 200],
+                speedRange: [15, 120],
+                maxAngle: 20,
+                assistGas: 'Air'
+            },
+            'carbon-fiber': {
+                absorption: 95,
+                reflectivity: 5,
+                powerRange: [200, 1000],
+                speedRange: [5, 40],
+                maxAngle: 10,
+                assistGas: 'Nitrogen'
+            }
+        };
+
+        function loadMaterialProperties() {
+            const material = document.getElementById('materialType').value;
+            const props = materialDatabase[material];
+            
+            document.getElementById('absorption').textContent = props.absorption + '%';
+            document.getElementById('reflectivity').textContent = props.reflectivity + '%';
+            document.getElementById('powerRange').textContent = props.powerRange[0] + '-' + props.powerRange[1] + ' W';
+            document.getElementById('speedRange').textContent = props.speedRange[0] + '-' + props.speedRange[1] + ' mm/s';
+            document.getElementById('maxAngle').textContent = props.maxAngle + '°';
+            document.getElementById('assistGas').textContent = props.assistGas;
+        }
+
+        // lens comparison
 
         // particle system with laser effects
         function initParticleSystem() {
