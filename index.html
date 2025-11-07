@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galvo Fibre Laser Angle Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            colour: #333;
+            margin-bottom: 10px;
+            text-align: centre;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            colour: #666;
+            text-align: centre;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            colour: #555;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-colour 0.3s;
+            background: #f9f9f9;
+        }
+
+        input[type="number"]:focus, select:focus {
+            outline: none;
+            border-colour: #667eea;
+            background: white;
+        }
+
+        .unit {
+            position: absolute;
+            right: 15px;
+            colour: #888;
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        input[type="number"] {
+            padding-right: 45px;
+        }
+
+        .preset-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .preset-btn {
+            padding: 8px 12px;
+            background: #f0f0f0;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .preset-btn:hover {
+            background: #667eea;
+            border-colour: #667eea;
+            colour: white;
+        }
+
+        .preset-btn.active {
+            background: #667eea;
+            border-colour: #667eea;
+            colour: white;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            colour: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 20px;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(0);
+        }
+
+        .results {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            display: none;
+        }
+
+        .results.show {
+            display: block;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            colour: #555;
+            font-size: 14px;
+        }
+
+        .result-value {
+            font-size: 20px;
+            font-weight: 700;
+            colour: #333;
+        }
+
+        .result-value.highlight {
+            colour: #667eea;
+            font-size: 24px;
+        }
+
+        .diagram {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            text-align: centre;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .info-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fef5e7;
+            border-left: 4px solid #f39c12;
+            border-radius: 6px;
+            font-size: 14px;
+            colour: #856404;
+        }
+
+        .slider-container {
+            margin-top: 15px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .slider-value {
+            text-align: centre;
+            margin-top: 5px;
+            font-size: 14px;
+            colour: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Galvo Fibre Laser Angle Calculator</h1>
+        <p class="subtitle">calculate beam incidence angle based on lens and field position</p>
+
+        <div class="input-group">
+            <label for="focalLength">Lens Focal Length</label>
+            <div class="input-wrapper">
+                <input type="number" id="focalLength" value="160" min="50" max="1000" step="1" oninput="calculate()">
+                <span class="unit">mm</span>
+            </div>
+            <div class="preset-buttons">
+                <button class="preset-btn" onclick="setFocalLength(50)">50mm</button>
+                <button class="preset-btn" onclick="setFocalLength(100)">100mm</button>
+                <button class="preset-btn active" onclick="setFocalLength(160)">160mm</button>
+                <button class="preset-btn" onclick="setFocalLength(175)">175mm</button>
+                <button class="preset-btn" onclick="setFocalLength(254)">254mm</button>
+                <button class="preset-btn" onclick="setFocalLength(330)">330mm</button>
+                <button class="preset-btn" onclick="setFocalLength(420)">420mm</button>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="inputType">Specify Position By</label>
+            <select id="inputType" onchange="toggleInputType()">
+                <option value="distance">distance from centre</option>
+                <option value="field">total field size</option>
+                <option value="coordinates">x,y coordinates</option>
+            </select>
+        </div>
+
+        <div id="distanceInput" class="input-group">
+            <label for="distance">Distance from Centre</label>
+            <div class="input-wrapper">
+                <input type="number" id="distance" value="50" min="0" max="500" step="0.1" oninput="calculate()">
+                <span class="unit">mm</span>
+            </div>
+        </div>
+
+        <div id="fieldInput" class="input-group" style="display: none;">
+            <label for="fieldSize">Total Field Size (Square)</label>
+            <div class="input-wrapper">
+                <input type="number" id="fieldSize" value="110" min="0" max="1000" step="1" oninput="calculate()">
+                <span class="unit">mm</span>
+            </div>
+            <div class="slider-container">
+                <label for="positionSlider">Position within Field (0% = centre, 100% = edge)</label>
+                <input type="range" id="positionSlider" min="0" max="100" value="50" oninput="updateSliderValue(); calculate()">
+                <div class="slider-value">Position: <span id="sliderValue">50</span>%</div>
+            </div>
+        </div>
+
+        <div id="coordinateInput" class="input-group" style="display: none;">
+            <label>Position Coordinates</label>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="input-wrapper">
+                    <input type="number" id="xCoord" value="30" min="-500" max="500" step="0.1" placeholder="X" oninput="calculate()">
+                    <span class="unit">mm</span>
+                </div>
+                <div class="input-wrapper">
+                    <input type="number" id="yCoord" value="40" min="-500" max="500" step="0.1" placeholder="Y" oninput="calculate()">
+                    <span class="unit">mm</span>
+                </div>
+            </div>
+        </div>
+
+        <button class="calculate-btn" onclick="calculate()" style="display: none;">Recalculate</button>
+
+        <div id="results" class="results">
+            <div class="result-item">
+                <span class="result-label">Beam Incidence Angle</span>
+                <span class="result-value highlight" id="angleResult">0°</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Angle (radians)</span>
+                <span class="result-value" id="angleRadians">0 rad</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Deviation from Perpendicular</span>
+                <span class="result-value" id="deviation">0°</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Actual Distance from Centre</span>
+                <span class="result-value" id="actualDistance">0 mm</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Maximum Field Size (theoretical)</span>
+                <span class="result-value" id="maxField">0 mm</span>
+            </div>
+            
+            <div class="diagram">
+                <canvas id="diagram" width="400" height="300"></canvas>
+            </div>
+
+            <div class="info-box">
+                <strong>note:</strong> the angle shown is the beam incidence angle relative to the perpendicular (normal) to the work surface. larger angles result in reduced cutting efficiency and potential quality issues. typical acceptable angles are below 15-20° for most applications.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setFocalLength(value) {
+            document.getElementById('focalLength').value = value;
+            
+            // update active button state
+            const buttons = document.querySelectorAll('.preset-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === value + 'mm') {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // trigger calculation with new focal length
+            calculate();
+        }
+
+        function toggleInputType() {
+            const inputType = document.getElementById('inputType').value;
+            const distanceInput = document.getElementById('distanceInput');
+            const fieldInput = document.getElementById('fieldInput');
+            const coordinateInput = document.getElementById('coordinateInput');
+            
+            distanceInput.style.display = inputType === 'distance' ? 'block' : 'none';
+            fieldInput.style.display = inputType === 'field' ? 'block' : 'none';
+            coordinateInput.style.display = inputType === 'coordinates' ? 'block' : 'none';
+            
+            // recalculate with the new input type
+            calculate();
+        }
+
+        function updateSliderValue() {
+            const slider = document.getElementById('positionSlider');
+            document.getElementById('sliderValue').textContent = slider.value;
+        }
+
+        function calculate() {
+            const focalLength = parseFloat(document.getElementById('focalLength').value);
+            const inputType = document.getElementById('inputType').value;
+            
+            let distanceFromCentre;
+            
+            if (inputType === 'distance') {
+                distanceFromCentre = parseFloat(document.getElementById('distance').value);
+            } else if (inputType === 'field') {
+                const fieldSize = parseFloat(document.getElementById('fieldSize').value);
+                const position = parseFloat(document.getElementById('positionSlider').value) / 100;
+                distanceFromCentre = (fieldSize / 2) * position;
+            } else if (inputType === 'coordinates') {
+                const x = parseFloat(document.getElementById('xCoord').value);
+                const y = parseFloat(document.getElementById('yCoord').value);
+                distanceFromCentre = Math.sqrt(x * x + y * y);
+            }
+            
+            // calculate angle using arctangent
+            // angle = arctan(distance_from_centre / focal_length)
+            const angleRadians = Math.atan(distanceFromCentre / focalLength);
+            const angleDegrees = angleRadians * (180 / Math.PI);
+            
+            // calculate theoretical maximum field size (typically limited to about 70% for quality)
+            const maxFieldTheoretical = focalLength * 2 * Math.tan(70 * Math.PI / 180);
+            
+            // display results
+            document.getElementById('angleResult').textContent = angleDegrees.toFixed(2) + '°';
+            document.getElementById('angleRadians').textContent = angleRadians.toFixed(4) + ' rad';
+            document.getElementById('deviation').textContent = angleDegrees.toFixed(2) + '°';
+            document.getElementById('actualDistance').textContent = distanceFromCentre.toFixed(1) + ' mm';
+            document.getElementById('maxField').textContent = maxFieldTheoretical.toFixed(0) + ' mm';
+            
+            // show results section
+            document.getElementById('results').classList.add('show');
+            
+            // draw diagram
+            drawDiagram(focalLength, distanceFromCentre, angleDegrees);
+        }
+
+        function drawDiagram(focalLength, distance, angle) {
+            const canvas = document.getElementById('diagram');
+            const ctx = canvas.getContext('2d');
+            
+            // clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const centerX = canvas.width / 2;
+            const centerY = 50;
+            const scale = Math.min(200 / focalLength, 2);
+            const workY = centerY + focalLength * scale;
+            const targetX = centerX + distance * scale;
+            
+            // draw lens
+            ctx.strokeStyle = '#667eea';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 20, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.fillStyle = '#667eea';
+            ctx.font = '12px Arial';
+            ctx.fillText('lens', centerX - 15, centerY - 25);
+            
+            // draw work surface
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(30, workY);
+            ctx.lineTo(canvas.width - 30, workY);
+            ctx.stroke();
+            ctx.fillStyle = '#333';
+            ctx.font = '12px Arial';
+            ctx.fillText('work surface', 30, workY + 20);
+            
+            // draw laser beam path
+            ctx.strokeStyle = '#ff0000';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(targetX, workY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            // draw perpendicular line for reference
+            ctx.strokeStyle = '#888';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([3, 3]);
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(centerX, workY + 30);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            // draw angle arc
+            ctx.strokeStyle = '#667eea';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            const arcRadius = 40;
+            ctx.arc(centerX, centerY, arcRadius, Math.PI / 2, Math.PI / 2 + (angle * Math.PI / 180), false);
+            ctx.stroke();
+            
+            // label angle
+            ctx.fillStyle = '#667eea';
+            ctx.font = 'bold 14px Arial';
+            ctx.fillText(angle.toFixed(1) + '°', centerX + 45, centerY + 20);
+            
+            // label distances
+            ctx.fillStyle = '#666';
+            ctx.font = '11px Arial';
+            ctx.fillText(focalLength.toFixed(0) + ' mm', centerX + 5, centerY + focalLength * scale / 2);
+            ctx.fillText(distance.toFixed(0) + ' mm', centerX + (targetX - centerX) / 2 - 15, workY - 5);
+            
+            // draw target point
+            ctx.fillStyle = '#ff0000';
+            ctx.beginPath();
+            ctx.arc(targetX, workY, 5, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // calculate on page load with default values
+        window.onload = function() {
+            calculate();
+        };
+    </script>
+</body>
+</html>
