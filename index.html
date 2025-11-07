@@ -727,13 +727,299 @@
         * {
             transition: color 0.3s, background-color 0.3s, border-color 0.3s;
         }
+
+        /* Clippy Assistant Styles */
+        #clippy-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            animation: clippyBounce 0.5s ease-out;
+        }
+
+        @keyframes clippyBounce {
+            0% {
+                transform: translateY(100px) scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(-20px) scale(1.1);
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        #clippy {
+            width: 60px;
+            height: 100px;
+            position: relative;
+            cursor: pointer;
+            animation: clippyFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes clippyFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .clippy-body {
+            width: 40px;
+            height: 90px;
+            background: linear-gradient(135deg, #f0f0f0 0%, #d0d0d0 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+            border: 3px solid #333;
+            transform: rotate(-10deg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .clippy-body::before {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 70px;
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            top: 10px;
+            left: 5px;
+            opacity: 0.7;
+        }
+
+        .clippy-body::after {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background: transparent;
+            border: 3px solid #333;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            top: -15px;
+            left: 15px;
+            transform: rotate(30deg);
+            border-bottom: none;
+            border-left: none;
+        }
+
+        .clippy-eye-left, .clippy-eye-right {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #333;
+            border-radius: 50%;
+            top: 25px;
+            animation: clippyBlink 4s infinite;
+        }
+
+        .clippy-eye-left {
+            left: 8px;
+        }
+
+        .clippy-eye-right {
+            right: 12px;
+        }
+
+        @keyframes clippyBlink {
+            0%, 90%, 100% {
+                transform: scaleY(1);
+            }
+            95% {
+                transform: scaleY(0.1);
+            }
+        }
+
+        .clippy-eyebrow-left, .clippy-eyebrow-right {
+            position: absolute;
+            width: 10px;
+            height: 2px;
+            background: #333;
+            top: 20px;
+            border-radius: 2px;
+        }
+
+        .clippy-eyebrow-left {
+            left: 7px;
+            transform: rotate(-10deg);
+        }
+
+        .clippy-eyebrow-right {
+            right: 11px;
+            transform: rotate(10deg);
+        }
+
+        #clippy:hover .clippy-eyebrow-left {
+            animation: eyebrowWiggleLeft 0.5s ease-in-out;
+        }
+
+        #clippy:hover .clippy-eyebrow-right {
+            animation: eyebrowWiggleRight 0.5s ease-in-out;
+        }
+
+        @keyframes eyebrowWiggleLeft {
+            0%, 100% {
+                transform: rotate(-10deg) translateY(0);
+            }
+            50% {
+                transform: rotate(-20deg) translateY(-2px);
+            }
+        }
+
+        @keyframes eyebrowWiggleRight {
+            0%, 100% {
+                transform: rotate(10deg) translateY(0);
+            }
+            50% {
+                transform: rotate(20deg) translateY(-2px);
+            }
+        }
+
+        #clippy-bubble {
+            position: absolute;
+            bottom: 110px;
+            right: 0;
+            background: white;
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 15px;
+            min-width: 250px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            animation: bubblePop 0.3s ease-out;
+        }
+
+        @keyframes bubblePop {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            80% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        #clippy-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 30px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid white;
+        }
+
+        #clippy-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -13px;
+            right: 28px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 12px solid #333;
+        }
+
+        #clippy-text {
+            color: #333;
+            font-size: 14px;
+            margin: 0 0 10px 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .clippy-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .clippy-buttons button {
+            padding: 5px 12px;
+            background: #0078d4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+
+        .clippy-buttons button:hover {
+            background: #106ebe;
+        }
+
+        .clippy-buttons button:last-child {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .clippy-buttons button:last-child:hover {
+            background: #d0d0d0;
+        }
+
+        #clippy-container.hidden {
+            animation: clippyHide 0.5s ease-in forwards;
+        }
+
+        @keyframes clippyHide {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100px) scale(0);
+                opacity: 0;
+            }
+        }
+
+        #clippy-container.minimized #clippy-bubble {
+            display: none;
+        }
+
+        #clippy-container.minimized #clippy {
+            transform: scale(0.8);
+            opacity: 0.6;
+        }
+
+        #clippy-container.minimized #clippy:hover {
+            transform: scale(0.9);
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
     <canvas id="particleCanvas"></canvas>
+    
+    <!-- Clippy Assistant -->
+    <div id="clippy-container">
+        <div id="clippy">
+            <div class="clippy-body">
+                <div class="clippy-eye-left"></div>
+                <div class="clippy-eye-right"></div>
+                <div class="clippy-eyebrow-left"></div>
+                <div class="clippy-eyebrow-right"></div>
+            </div>
+        </div>
+        <div id="clippy-bubble">
+            <p id="clippy-text">Hi! It looks like you're calculating laser angles. Need help?</p>
+            <div class="clippy-buttons">
+                <button onclick="clippyHelp()">Yes, help me!</button>
+                <button onclick="clippyDismiss()">No thanks</button>
+            </div>
+        </div>
+    </div>
+    
     <div class="container">
         <h1>Galvo Fibre Laser Angle Calculator</h1>
-        <p class="subtitle">professional laser cutting parameter calculator</p>
+        <p class="subtitle">laser cutting parameter calculator</p>
         <div class="interaction-hint">
             <span>🎮 Click background for lasers • Press [Space] for burst • Press [P] for particles</span>
         </div>
@@ -1538,6 +1824,131 @@
             animateDiagram();
         }
 
+        // Clippy Assistant Functions
+        let clippyMessages = [
+            "Hi! It looks like you're calculating laser angles. Need help?",
+            "Did you know? Smaller focal lengths give you wider field coverage but steeper angles!",
+            "Pro tip: Keep your cutting angle below 15° for best quality!",
+            "The closer to the field edge, the greater the angle. Try to keep important cuts near the centre!",
+            "Different materials have different angle tolerances. Check the Materials tab!",
+            "Press Space for a laser burst effect! Press P for particles!",
+            "That's a pretty steep angle! Consider using a longer focal length lens.",
+            "Perfect angle! This should give you excellent cut quality.",
+            "Click on the background to shoot lasers from your cursor!",
+            "The cross-section view shows how the kerf changes with angle.",
+            "Remember: thicker materials are more sensitive to beam angle!"
+        ];
+
+        let clippyMessageIndex = 0;
+        let clippyTimer = null;
+        let clippyMinimized = false;
+
+        function showClippy() {
+            const container = document.getElementById('clippy-container');
+            container.style.display = 'block';
+            container.classList.remove('hidden', 'minimized');
+            
+            // show a contextual message
+            const angle = parseFloat(document.getElementById('angleResult')?.textContent || '0');
+            let message = clippyMessages[0];
+            
+            if (angle > 20) {
+                message = clippyMessages[6];
+            } else if (angle < 5) {
+                message = clippyMessages[7];
+            } else {
+                message = clippyMessages[clippyMessageIndex];
+                clippyMessageIndex = (clippyMessageIndex + 1) % clippyMessages.length;
+            }
+            
+            document.getElementById('clippy-text').textContent = message;
+        }
+
+        function clippyHelp() {
+            const helpMessages = [
+                "The focal length determines your working field size. Common lenses are 100mm (small field, high precision) to 420mm (large field).",
+                "The angle shown is how the laser beam hits the material. 0° is perpendicular (best), higher angles reduce cut quality.",
+                "The cut cross-section shows the kerf (cut width) at the top and bottom of your material.",
+                "The colour coding helps you understand quality: Green = Excellent, Yellow = Good, Orange = Acceptable, Red = Poor.",
+                "Use the thickness buttons to see how beam divergence affects thicker materials.",
+                "The particle effects are just for fun! Click around and press keys to play with them."
+            ];
+            
+            const randomHelp = helpMessages[Math.floor(Math.random() * helpMessages.length)];
+            document.getElementById('clippy-text').textContent = randomHelp;
+            
+            // remove buttons after help
+            const buttons = document.querySelector('.clippy-buttons');
+            buttons.style.display = 'none';
+            
+            // restore buttons after 5 seconds
+            setTimeout(() => {
+                buttons.style.display = 'flex';
+                showClippy();
+            }, 5000);
+        }
+
+        function clippyDismiss() {
+            const container = document.getElementById('clippy-container');
+            container.classList.add('minimized');
+            clippyMinimized = true;
+            
+            // completely hide after 10 minutes
+            setTimeout(() => {
+                if (clippyMinimized) {
+                    container.classList.add('hidden');
+                }
+            }, 600000);
+        }
+
+        function clippyClick() {
+            if (clippyMinimized) {
+                showClippy();
+                clippyMinimized = false;
+            } else {
+                // wiggle animation
+                const clippy = document.getElementById('clippy');
+                clippy.style.animation = 'none';
+                setTimeout(() => {
+                    clippy.style.animation = 'clippyFloat 3s ease-in-out infinite';
+                }, 10);
+                
+                // change message
+                showClippy();
+            }
+        }
+
+        // initialize Clippy timer
+        function initClippy() {
+            // show Clippy after 3 seconds
+            setTimeout(() => {
+                showClippy();
+            }, 3000);
+            
+            // periodically show new tips if not minimized
+            clippyTimer = setInterval(() => {
+                if (!clippyMinimized && Math.random() > 0.7) {
+                    showClippy();
+                }
+            }, 30000);
+            
+            // add click handler to Clippy
+            document.getElementById('clippy').addEventListener('click', clippyClick);
+            
+            // monitor angle changes for contextual help
+            const originalCalculate = window.calculate;
+            window.calculate = function() {
+                originalCalculate.apply(this, arguments);
+                
+                // occasionally offer contextual help based on angle
+                if (!clippyMinimized && Math.random() > 0.9) {
+                    setTimeout(() => {
+                        showClippy();
+                    }, 1000);
+                }
+            };
+        }
+
         // calculate on page load with default values
         window.onload = function() {
             calculate();
@@ -1548,12 +1959,11 @@
             const angleRadians = Math.atan(distance / focalLength);
             const angleDegrees = angleRadians * (180 / Math.PI);
             drawCutSection(angleDegrees, currentThickness);
-            // initialize other calculators
+            // initialize Clippy assistant
+            initClippy();
+            // load material properties
             setTimeout(() => {
-                calculateOptical();
-                calculatePractical();
                 loadMaterialProperties();
-                drawFieldQualityMap();
             }, 100);
         };
 
